@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block contenido %}
+{% load books_extras %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="card border-danger col-lg-4 col-sm-12">
+      <h4 class="card-title">Borrado de base de datos, confirma.</h4>
+      <p class="card-text">Esto borrará al completo toda la base de datos, recuerda que habrá que cargarla enterá después.</p>
+     
+      {% if request.get_full_path == "/borrar-ttl/" and  user|has_group:"librero" or user.is_superuser %}
+
+      <form id='formulario' method='post' style="margin-bottom: 20px" action=''>{% csrf_token %}
+        <input type="submit" class="btn btn-outline-primary" name="Aceptar" value="Aceptar">
+        <input type="submit" class="btn btn-outline-primary" name="Cancelar" value="Cancelar">
+      </form>
+
+      {% else %}
+      <p style="color:red">No tienes permiso para borrarlo</p>
+      {% endif %}
+
+    </div>
+  </div>
+</div>
+{% endblock %}

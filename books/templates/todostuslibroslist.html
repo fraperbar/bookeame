@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+    <div class="container">
+    <div class="row justify-content-end">
+        <a href="/buscar-ttl">Buscar en los libros de TodosTusLibros --></a>
+    </div>
+    <div style="color: #d49266" class="row justify-content-center">
+      <h1>TodosTusLibros</h1>
+    </div>
+    <div class="row justify-content-center">
+      <div>TodosTusLibros es una página de compra y venta de libros hecha en colaboración de varias tiendas locales para poder combatir a amazon, de esta forma se promueve el comercio local.</div>
+    </div>
+    <hr>
+        {% for libro in libros %}
+            <div class="row justify-content-center" style="margin-top:20px;">
+                <img class="col-3" src="{{libro.urlImagen}}" ></img>
+                <div class="col-9">
+                    <table class="table table-striped" >
+                      <tr>
+                        <th style="color:#d49266"  scope="row">{{libro.titulo}}</th>
+                        <th style="text-align:end;" scope="row">Título</th>
+                      </tr>
+                      <tr>
+                        <th style="color:#d49266"  scope="row">{{libro.autor}}</th>
+                        <th style="text-align:end;" scope="row">Autor</th>
+                      </tr>
+                      <tr>
+                        <th style="color:#d49266"  scope="row">{{libro.isbn}}</th>
+                        <th style="text-align:end;" scope="row">ISBN</th>
+                      </tr>
+                      <tr>
+                        <th style="color:#d49266"  scope="row">{{libro.fechapublicacion|date:"d/m/Y"}}</th>
+                        <th style="text-align:end;" scope="row">Fecha de publicación</th>
+                      </tr>
+                      <tr>
+                        <th style="color:#d49266"  scope="row">{{libro.categorias}}</th>
+                        <th style="text-align:end;" scope="row">Categorías</th>
+                      </tr>
+                      <tr>
+                        <th style="color:#d49266"  scope="row">{{libro.precio}}</th>
+                        <th style="text-align:end;" scope="row">Precio</th>
+                      </tr>
+                      <tr>
+                        <th style="color:#d49266"  scope="row"><a style="color:#3366BB;cursor: pointer; " data-toggle="modal" data-target="#dialogo{{forloop.counter}}">Ver descripción</a></th>
+                        <th style="text-align:end;" scope="row">Descripción</th>
+                      </tr>
+                      <tr>
+                        <th style="color:#d49266"  scope="row"><a style="color:#3366BB;" href="{{libro.urlCompra}}">Ver en tienda</a></th>
+                        <th style="text-align:end;" scope="row">Comprar</th>
+                      </tr>
+                    </table>
+                
+                </div>
+                <div class="modal fade" id="dialogo{{forloop.counter}}">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                      <div class="modal-content">
+                  
+                        <div class="modal-header">
+                          <h4 class="modal-title">Sinopsis de "{{libro.titulo}}"</h4>
+                          <button type="button" class="close" data-dismiss="modal">X</button>
+                        </div>
+                  
+                        <!-- cuerpo del diálogo -->
+                        <div class="modal-body">
+                            {{libro.descripcion}}
+                        </div>
+                  
+                        <!-- pie del diálogo -->
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        </div>
+                  
+                      </div>
+                    </div>
+                  </div> 
+            </div>
+            <hr>
+        {% endfor %}
+    </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+              <span class="sr-only">Previous</span>
+            </a>
+          </li>
+            {% endif %}
+          <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+          <li class="page-item"><a class="page-link" href="?page=2">2</a></li>
+          <li class="page-item"><a class="page-link" href="?page=3">3</a></li>
+          <li class="page-item"><a class="page-link" href="?page=4">4</a></li>
+          <li class="page-item"><a class="page-link" href="?page=5">5</a></li>
+          <li class="page-item"><a class="page-link" href="?page=6">6</a></li>
+          <li class="page-item"><a class="page-link" href="?page=7">7</a></li>
+          <li class="page-item"><a class="page-link" href="?page=8">8</a></li>
+          <li class="page-item"><a class="page-link" href="?page=9">9</a></li>
+          <li class="page-item"><a class="page-link" href="?page=10">10</a></li>
+          {% if page_obj.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+              <span class="sr-only">Next</span>
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
+{% endblock %}

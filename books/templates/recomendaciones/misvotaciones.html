@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<div class="container">
+    <div class="row justify-content-center">
+      <h1 style="color: #d49266;">Votaciones hechas</h1>
+    </div>
+    <div class="row justify-content-center">
+      Puedes ver recomendaciones de libros similares a los votados pulsando en ellos
+    </div>
+
+    <hr>
+    
+    <div class="row justify-content-center">
+        {% if page0 != 0 %}
+        <a class="col-2" href="/misvotaciones/{{page0}}">Anterior página</a>
+        {% else %}
+          <p class="col-2">Anterior página</p>
+        {% endif %}
+      <input id="input2" class="col-1 offset-3" type="number"></input>
+      <a href="" id="ir2">Ir a pg</a>
+      <a class="col-2 offset-3" href="/misvotaciones/{{page1}}">Siguiente página</a>
+      </div>
+    {% for votacion in votaciones %}
+    <div class="row justify-content-start" style="margin-top:20px;">
+        <div class="col-12">
+            <table class="table table-striped" >
+              <tr>
+                <th style="color:#d49266"  scope="row">{{votacion.isbn.titulo}}</th>
+                <th style="text-align:end;" scope="row">Título</th>
+              </tr>
+              <tr>
+                <th style="color:#d49266"  scope="row">{{votacion.isbn.autor}}</th>
+                <th style="text-align:end;" scope="row">Autor</th>
+              </tr>
+              <tr>
+                <th style="color:#d49266"  scope="row">{{votacion.isbn.isbn}}</th>
+                <th style="text-align:end;" scope="row">ISBN</th>
+              </tr>
+              <tr>
+                <th style="color:#d49266"  scope="row">{{votacion.isbn.anyopublicacion}}</th>
+                <th style="text-align:end;" scope="row">Año de publicación</th>
+              </tr>
+              <tr>
+                <th style="color:#d49266"  scope="row">{{votacion.book_rating}}</th>
+                <th style="text-align:end;" scope="row">Rating</th>
+              </tr>
+              <tr>
+                <th style="color:#d49266"  scope="row"><a href="/similares/{{votacion.isbn.isbn}}/"> Ver</a></th>
+                <th style="text-align:end;" scope="row">Libros similares</th>
+              </tr>
+            
+            </table>
+            <hr>
+        </div>    
+    </div>
+    
+    {% empty %}
+    <div class="row justify-content-center">
+      <h2 style="color:red;">Aún no se ha realizado ninguna votación</h2></div>
+    {% endfor %}
+    <div class="row justify-content-center">
+      {% if page0 != 0 %}
+        <a class="col-2" href="/misvotaciones/{{page0}}">Anterior página</a>
+        {% else %}
+          <p class="col-2">Anterior página</p>
+        {% endif %}
+      <input id="input2" class="col-1 offset-3" type="number"></input>
+      <a href="" id="ir2">Ir a pg</a>
+      <a class="col-2 offset-3" href="/misvotaciones/{{page1}}">Siguiente página</a>
+      </div>
+</div>
+
+<script>
+    let input1 = document.getElementById("input1");
+    let ir1 = document.getElementById("ir1");
+    ir1.onclick=()=>{
+      ir1.href="/misvotaciones/"+input1.value
+    }
+    let input2 = document.getElementById("input2");
+    let ir2 = document.getElementById("ir2");
+    ir2.onclick=()=>{
+      ir2.href="/misvotaciones/"+input2.value
+    }
+  </script>
+{% endblock %}

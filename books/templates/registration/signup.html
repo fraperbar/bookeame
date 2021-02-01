@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="card text-center border-primary">
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    <p>
+                        {{ field.label_tag }}<br>
+                        {{ field }}
+                        {% if field.help_text %}
+                        <small style="color: grey">{{ field.help_text | safe }}</small>
+                        {% endif %}
+                        {% for error in field.errors %}
+                        <p style="color: red">{{ error | safe }}</p>
+                        {% endfor %}
+                    </p>
+                    {% endfor %}
+                    <button class="btn btn-outline-primary" type="submit">Registrarse</button>
+                </form>
+            </div>
+    </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<div class="container">
+  <div class="row justify-content-center">
+    <h1 style="color: #d49266">Votar libros</h1>    
+    </div>
+  <div class="row justify-content-center">
+    Esto hará que las recomendaciones sean mejores o que se muestren en el caso de que no hayas votado ninguno
+
+
+  </div>
+  <hr>
+  
+  <div class="row justify-content-center">
+    <span class="col-sm-2" >Buscar por título: </span>
+    <form style="margin-left: 10px;" method="GET" action="">
+      <input type="text" id="tit" name="tit">
+      <input value="Buscar" class="btn btn-outline-primary" type="submit">
+    </form>
+  </div>
+  <hr>
+ 
+  <div class="row justify-content-center">
+    <span class="col-sm-2" >Buscar por isbn:</span>
+    <form style="margin-left: 10px;" method="GET" action="">
+      <input type="text" id="isbn" name="isbn">
+      <input value="Buscar" class="btn btn-outline-primary" type="submit">
+    </form>
+  </div>
+  <hr>
+  <div  class="row justify-content-center">
+    
+    <span class="col-2" >Buscar por autor:</span>
+    <form style="margin-left: 10px;" method="GET" action="">
+      <input type="text" id="autor" name="autor">
+      <input value="Buscar" class="btn btn-outline-primary" type="submit">
+    </form>
+  </div>
+  <hr>
+  
+  <div class="row justify-content-center">
+  <span style="color:grey">*La paginación no funciona con la búsqueda</span>
+  </div>
+  <hr>
+  <div class="row justify-content-center">
+    {% if page0 != 0 %}
+    <a class="col-2" href="/votacion/{{page0}}">Anterior página</a>
+    {% else %}
+          <p class="col-2">Anterior página</p>
+    {% endif %}
+    <input id="input1" class="col-1 offset-3" type="number" value=1></input>
+    <a href="" id="ir1">Ir a pg</a>
+    <a class="col-2 offset-3" href="/votacion/{{page1}}">Siguiente página</a>
+  </div>
+    {% for libro in libros %}
+            <div class="row justify-content-start" style="margin-top:20px;">
+                <div class="col-12">
+                    <table class="table table-striped" >
+                      <tr>
+                        <th style="color:#d49266"  scope="row">{{libro.titulo}}</th>
+                        <th style="text-align:end;" scope="row">Título</th>
+                      </tr>
+                      <tr>
+                        <th style="color:#d49266"  scope="row">{{libro.autor}}</th>
+                        <th style="text-align:end;" scope="row">Autor</th>
+                      </tr>
+                      <tr>
+                        <th style="color:#d49266"  scope="row">{{libro.isbn}}</th>
+                        <th style="text-align:end;" scope="row">ISBN</th>
+                      </tr>
+                      <tr>
+                        <th style="color:#d49266"  scope="row">{{libro.anyopublicacion}}</th>
+                        <th style="text-align:end;" scope="row">Año de publicación</th>
+                      </tr>
+                    
+                    </table>
+                    <form class="form-inline" method="post" action=''>
+                        {% csrf_token %}
+                        {{formVotante}}
+                        <input id="isbn" name="isbn" type="hidden" value="{{libro.isbn}}">
+                        <button class="btn btn-outline-primary" type="submit">Votar</button>
+                    </form>
+                </div>    
+            </div>
+            <hr>
+    {% endfor %}
+    <div class="row justify-content-center">
+      {% if page0 != 0 %}
+      <a class="col-2" href="/votacion/{{page0}}">Anterior página</a>
+      {% else %}
+          <p class="col-2">Anterior página</p>
+      {% endif %}
+    <input id="input2" class="col-1 offset-3" type="number"></input>
+    <a href="" id="ir2">Ir a pg</a>
+    <a class="col-2 offset-3"  href="/votacion/{{page1}}">Siguiente página</a>
+    </div>
+    <div style="margin-bottom:50px"></div>
+    </div>
+    <script>
+      let input1 = document.getElementById("input1");
+      let ir1 = document.getElementById("ir1");
+      ir1.onclick=()=>{
+        ir1.href="/votacion/"+input1.value
+      }
+      let input2 = document.getElementById("input2");
+      let ir2 = document.getElementById("ir2");
+      ir2.onclick=()=>{
+        ir2.href="/votacion/"+input2.value
+      }
+    </script>
+{% endblock %}

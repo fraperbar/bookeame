@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block contenido %}
+
+<div class="container">
+
+  <div style="color:#d49266" class="row justify-content-center">
+    <h1>Libros similares</h1>
+  </div>
+  <div class="row justify-content-center">
+    Si te gustó "{{libro.titulo}}" te pueden gustar los siguentes libros.
+  </div>
+  <hr>
+{% for item, score in items %}
+        
+        <div class="row justify-content-center">
+        <div class="col-12">
+            <table class="table table-striped" >
+              <tr>
+                <th style="color:#d49266"  scope="row">{{item.titulo}}</th>
+                <th style="text-align:end;" scope="row">Título</th>
+              </tr>
+              <tr>
+                <th style="color:#d49266"  scope="row">{{item.autor}}</th>
+                <th style="text-align:end;" scope="row">Autor</th>
+              </tr>
+              <tr>
+                <th style="color:#d49266"  scope="row">{{item.isbn}}</th>
+                <th style="text-align:end;" scope="row">ISBN</th>
+              </tr>
+              <tr>
+                <th style="color:#d49266"  scope="row">{{item.anyopublicacion}}</th>
+                <th style="text-align:end;" scope="row">Año de publicación</th>
+              </tr>
+              <tr>
+                <th style="color:#d49266"  scope="row">{{score | floatformat:"2"}}</th>
+                <th style="text-align:end;" scope="row">Score</th>
+              </tr>
+            </table>
+            </div>
+            </div>
+            <hr>
+{% endfor %}
+        </div>
+{% endblock %}

@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-sm-6, col-m-5">
+            <form id='form' class="form-inline" method='GET' action=''> 
+                {{formtext}}
+                <input  class="btn btn-outline-primary" type='submit' value='Buscar'/>
+            </form>
+        </div>
+        <div class="vertical"></div>
+        <div class="col-sm-6, col-m-5">
+            <form id='form' class="form-inline" method='GET' action=''> 
+                {{formautor}}
+                <input  class="btn btn-outline-primary" type='submit' value='Buscar'/>
+            </form>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row justify-content-center">
+        <div class="col-sm-6, col-m-5">
+            <form id='form' class="form-inline" method='GET' action=''> 
+                {{formisbn}}
+                <input  class="btn btn-outline-primary" type='submit' value='Buscar'/>
+            </form>
+        </div>
+        <div class="vertical"></div>
+        <div class="col-sm-6, col-m-5">
+            <form id='form' class="form-inline" method='GET' action=''> 
+                {{formrating}}
+                <input  class="btn btn-outline-primary" type='submit' value='Buscar'/>
+            </form>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row justify-content-center">
+      <div class="col-sm-6, col-m-5">
+          <form id='form' class="form-inline" method='GET' action=''> 
+              {{formfecha}}
+              <input  class="btn btn-outline-primary" type='submit' value='Buscar'/>
+          </form>
+      </div>
+  </div>
+
+  <hr>
+
+  <div class="row justify-content-center">
+    <div class="col-sm-6, col-m-5">
+        <form id='form' class="form-inline" method='GET' action=''> 
+            {{formgenero}}
+            <input style="margin-left:10px;"  class="btn btn-outline-primary" type='submit' value='Buscar'/>
+        </form>
+    </div>
+</div>
+    </form>
+    {% for error in errores %}
+      <div class="row justify-content-center">
+        <p style="color:red;">{{error}}</p>
+      </div>
+    {% endfor %}
+{% for libro in libros %}
+<div class="row justify-content-center" style="margin-top:20px;">
+    <img class="col-3" src="{{libro.urlImagen}}" ></img>
+    <div class="col-9">
+        <table class="table table-striped" >
+          <tr>
+            <th style="color:#d49266"  scope="row">{{libro.titulo}}</th>
+            <th style="text-align:end;" scope="row">Título</th>
+          </tr>
+          <tr>
+            <th style="color:#d49266"  scope="row">{{libro.autor}}</th>
+            <th style="text-align:end;" scope="row">Autor</th>
+          </tr>
+          <tr>
+            <th style="color:#d49266"  scope="row">{{libro.isbn}}</th>
+            <th style="text-align:end;" scope="row">ISBN</th>
+          </tr>
+          <tr>
+            <th style="color:#d49266"  scope="row">{{libro.fechapublicacion|date:"d/m/Y"}}</th>
+            <th style="text-align:end;" scope="row">Fecha de publicación</th>
+          </tr>
+          <tr>
+            <th style="color:#d49266"  scope="row">{{libro.rating}}</th>
+            <th style="text-align:end;" scope="row">Rating</th>
+          </tr>
+          <tr>
+            <th style="color:#d49266"  scope="row">{{libro.genero}}</th>
+            <th style="text-align:end;" scope="row">Género</th>
+          </tr>
+          <tr>
+            <th style="color:#d49266"  scope="row"><a style="color:#3366BB;" href="/libros/{{libro.id}}">Ver</a></th>
+            <th style="text-align:end;" scope="row">Ver detalles</th>
+          </tr>
+        </table>
+    
+    </div>
+
+</div>
+{% endfor %}
+
+</div>
+{% endblock %}

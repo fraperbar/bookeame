@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-sm-6, col-m-5">
+            <form id='form' class="form-inline" method='GET' action=''> 
+                {{formtext}}
+                <input  class="btn btn-outline-primary" type='submit' value='Buscar'/>
+            </form>
+        </div>
+        <div class="vertical"></div>
+        <div class="col-sm-6, col-m-5">
+            <form id='form' class="form-inline" method='GET' action=''> 
+                {{formautor}}
+                <input  class="btn btn-outline-primary" type='submit' value='Buscar'/>
+            </form>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row justify-content-center">
+        <div class="col-sm-6, col-m-5">
+            <form id='form' class="form-inline" method='GET' action=''> 
+                {{formisbn}}
+                <input  class="btn btn-outline-primary" type='submit' value='Buscar'/>
+            </form>
+        </div>
+        <div class="vertical"></div>
+        <div class="col-sm-6, col-m-5">
+          <form id='form' class="form-inline" method='GET' action=''> 
+              {{formprecio}}
+              <input  class="btn btn-outline-primary" type='submit' value='Buscar'/>
+          </form>
+        </div>
+    </div>
+    
+    <hr>
+
+    <div class="row justify-content-center">
+      <div class="col-sm-6, col-m-5">
+          <form id='form' class="form-inline" method='GET' action=''> 
+              {{formfecha}}
+              <input  class="btn btn-outline-primary" type='submit' value='Buscar'/>
+          </form>
+      </div>
+    </div>
+
+    <hr>
+    
+    <div class="row justify-content-center">
+      <div class="col-sm-6, col-m-5">
+          <form id='form' class="form-inline" method='GET' action=''> 
+              {{formgenero}}
+              <input  class="btn btn-outline-primary" type='submit' value='Buscar'/>
+          </form>
+      </div>
+    </div>
+  <hr>
+
+
+    </form>
+    {% for error in errores %}
+      <div class="row justify-content-center">
+        <p style="color:red;">{{error}}</p>
+      </div>
+    {% endfor %}
+{% for libro in libros %}
+<div class="row justify-content-center" style="margin-top:20px;">
+  <img class="col-3" src="{{libro.urlImagen}}" ></img>
+  <div class="col-9">
+      <table class="table table-striped" >
+        <tr>
+          <th style="color:#d49266"  scope="row">{{libro.titulo}}</th>
+          <th style="text-align:end;" scope="row">Título</th>
+        </tr>
+        <tr>
+          <th style="color:#d49266"  scope="row">{{libro.autor}}</th>
+          <th style="text-align:end;" scope="row">Autor</th>
+        </tr>
+        <tr>
+          <th style="color:#d49266"  scope="row">{{libro.isbn}}</th>
+          <th style="text-align:end;" scope="row">ISBN</th>
+        </tr>
+        <tr>
+          <th style="color:#d49266"  scope="row">{{libro.fechapublicacion|date:"d/m/Y"}}</th>
+          <th style="text-align:end;" scope="row">Fecha de publicación</th>
+        </tr>
+        <tr>
+          <th style="color:#d49266"  scope="row">{{libro.precio}}</th>
+          <th style="text-align:end;" scope="row">Precio</th>
+        </tr>
+        <tr>
+          <th style="color:#d49266"  scope="row">{{libro.categorias}}</th>
+          <th style="text-align:end;" scope="row">Categorías</th>
+        </tr>
+        <tr>
+          <th style="color:#d49266"  scope="row"><a style="color:#3366BB;cursor: pointer; " data-toggle="modal" data-target="#dialogo{{forloop.counter}}">Ver descripción</a></th>
+          <th style="text-align:end;" scope="row">Descripción</th>
+        </tr>
+        <tr>
+          <th style="color:#d49266"  scope="row"><a style="color:#3366BB;" href="{{libro.urlCompra}}">Ver en tienda</a></th>
+          <th style="text-align:end;" scope="row">Comprar</th>
+        </tr>
+      </table>
+  
+  </div>
+  <div class="modal fade" id="dialogo{{forloop.counter}}">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+    
+          <div class="modal-header">
+            <h4 class="modal-title">Sinopsis de "{{libro.titulo}}"</h4>
+            <button type="button" class="close" data-dismiss="modal">X</button>
+          </div>
+    
+          <!-- cuerpo del diálogo -->
+          <div class="modal-body">
+              {{libro.descripcion}}
+          </div>
+    
+          <!-- pie del diálogo -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          </div>
+    
+        </div>
+      </div>
+    </div> 
+</div>
+<hr>
+{% endfor %}
+
+</div>
+{% endblock %}

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {% load books_extras %}
+    {% load static %}
+    <link rel="icon" type="image/svg+xml" href="{% static 'books/book.svg' %}" sizes="any">
+    <title>Bookeame</title>
+  <style>
+   {% block style_css %}{% endblock %}
+    a{
+        transition:color 0.5s;
+    }
+    a:hover{
+        
+        color:#dbbba6;
+    }
+    .agenero{
+        transition:color 0.5s;
+    }
+    .agenero:hover{
+        color:#5e4636;
+    }
+   .muestra{
+        background-color: #dbbba6;
+    }
+    .vertical{
+        border-left: thick solid  #dbbba6; 
+        margin-left: 3%;
+        margin-right: 3%;
+    }
+
+    .desaparece{
+        position:absolute;
+        left: -200000px;
+    }
+  </style>
+</head>
+<body>
+  <header> 
+  	{% block encabezado %}{% endblock %}
+    <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #dbbba6;">
+        <a class="navbar-brand" href="/">Bookeame</a>
+        
+        
+        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" ><span class="navbar-toggler-icon"></span></button>
+
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/todostuslibros">Compras</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/recomendaciones">Recomendaciones</a>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/planetalibros">Explora más</a>
+                </li>
+                {% if user|has_group:"librero" or user.is_superuser %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/carga-bd">Cargar BD</a>
+                </li>
+                {% endif %}
+                
+            </ul>
+                
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                <form id="titulo_isbnform" class="form-inline my-2 my-lg-0" method="GET" action="/buscador-general">
+                    <input name="titulo_isbn" id="titulo_isbn"  class="form-control mr-sm-2" type="text" placeholder="Título o ISBN">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"  style="display:none;"></button>
+                </form>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#" id="dropdownId" style="font-weight: bold;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.get_username|upper }}</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownId">
+                        <a class="dropdown-item" href="{% url 'logout'%}?next=/">Logout</a>
+                    </div>
+                </li>
+                
+                {% else %}
+                <form id="titulo_isbnform" class="form-inline my-2 my-lg-0" method="GET" action="/buscador-general">
+                    <input name="titulo_isbn" id="titulo_isbn"  class="form-control mr-sm-2" type="text" placeholder="Título o ISBN">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"  style="display:none;"></button>
+                </form>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'login'%}?next={{request.path}}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/signup">Registro</a>
+                </li>
+                {% endif %}
+            </ul>
+
+        </div>
+    </nav>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+       
+	<hr>
+  </header>
+  
+    {% block contenido %}{% endblock %}
+  {% block pie %}{% endblock %} 
+
+</body>
+</html>

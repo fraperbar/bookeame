@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% block 'style_css' %}
+
+{% endblock %}
+{% block contenido %}
+<div class="container">   
+    <div class="row justify-content-center">
+      <h1 style="color: #d49266">Elige que quieres cargar</h1>
+    </div>
+
+  <hr>
+    <div class="row justify-content-center">
+      <h3 style="color: #d49266">Cargas de TodosTusLibros, Dataset y borrado completo BD</h3>
+    </div>
+  <hr>
+  <div class="row justify-content-center">
+    <div class="col-md-4" style="margin-top: 30px;">        
+      <div style="height: 260px;" class="card text-center">
+        <div class="card-body">
+          <h4 class="card-title">Cargar precios libros más vendidos.</h4>
+          <p class="card-text"> Es posible que el host remoto cancele la conexión si no tienes libros cargados, al ejecutarlo de nuevo lo termina de cargar</p>
+        </div>
+        <a href="/carga-ttl" class="btn btn-outline-primary">Cargar</a>
+        <a href="/borrar-ttl" class="btn btn-outline-danger">Borrar</a>
+        
+      </div>          
+    </div>
+
+    <div class="col-md-4" style="margin-top: 30px;">        
+      <div style="height: 260px;" class="card text-center">
+        <div class="card-body">
+          <h4 class="card-title">Cargar dataset.</h4>
+          <p class="card-text"> Este procesos es muy lento, tener en cuenta a la hora de recargar, esto borra los registros que ya existieran.</p>
+        </div>
+        <a href="/cargaldts" class="btn btn-outline-primary">Cargar</a>
+      </div>          
+    </div>
+  
+      <div class="col-md-4" style="margin-top: 30px;">        
+          <div style="height: 260px;" class="card bg-danger text-white text-center">
+            <div class="card-body">
+              <h4 class="card-title">Borrar bd al completo.</h4>
+              <p class="card-text">Esto borrará al completo la base de datos, en concreto los libros de TodosTusLibros y de PlanetaLibros. </p>
+              
+            </div>
+            <a href="/borrar" class="btn btn-outline-primary">Borrar</a>
+          </div>          
+      </div>  
+      </div>
+      <hr>
+      <div class="row justify-content-center">
+        <h3 style="color: #d49266">Cargas de TodosTusLibros y Dataset</h3>
+      </div>
+    <hr>
+      <div class="row justify-content-center">
+      <div class="col-md-4" style="margin-top: 30px;">        
+        <div style="height: 260px;" class="card text-center">
+          <div class="card-body">
+            <h4 class="card-title">Indexar libros GoodReads.</h4>
+            <p class="card-text"> Este proceso borra el índice que ya existiera. Recuerda indexar tras volver a recargar los libros.</p>
+          </div>
+          <a href="/indexa-libros" class="btn btn-outline-primary">Cargar</a>
+        </div>          
+      </div>
+
+      <div class="col-md-4" style="margin-top: 30px;">        
+        <div style="height: 260px;" class="card text-center">
+          <div class="card-body">
+            <h4 class="card-title">Indexar libros TodosTusLibros.</h4>
+            <p class="card-text"> Este proceso borra el índice que ya existiera. Recuerda indexar tras volver a recargar los libros.</p>
+          </div>
+          <a href="/indexa-ttl" class="btn btn-outline-primary">Cargar</a>
+        </div>          
+      </div>
+
+      <div class="col-md-4" style="margin-top: 30px;">        
+        <div style="height: 260px;" class="card text-center">
+          <div class="card-body">
+            <h4 class="card-title">Carga RS.</h4>
+            <p class="card-text"> Este proceso puede ser lento.</p>
+          </div>
+          <a href="/cargar-rs" class="btn btn-outline-primary">Cargar</a>
+        </div>          
+      </div>
+    </div>
+    <hr>
+    <div class="row justify-content-center">
+      <h3 style="color: #d49266">Cargar libros de Planeta de libros</h3>
+    </div>
+    
+    <hr>
+    
+    <div class="row justify-content-center">
+      
+      <div class="col-md-4" style="margin-top: 30px;">        
+        <div style="height: 260px;" class="card text-center">
+          <div class="card-body">
+            <h4 class="card-title">Cargar libros nuevos planetalibros.</h4>
+            <p class="card-text"> Carga las novedades de planeta libros, este proceso es asumible. Borra los que ya había en la base de datos.</p>
+          </div>
+          <a href="/carga-planeta-nuevos" class="btn btn-outline-primary">Cargar</a>
+          
+        </div>          
+      </div>
+      <div class="col-md-4" style="margin-top: 30px;">        
+        <div style="height: 260px;" class="card text-center">
+          <div class="card-body">
+            <h4 class="card-title">Cargar libros recomendados planetalibros.</h4>
+            <p class="card-text"> Carga las recomendaciones de planeta libros, este proceso es asumible. Borra los que ya había en la base de datos.</p>
+          </div>
+          <a href="/carga-planeta-recomendados" class="btn btn-outline-primary">Cargar</a>
+          
+        </div>          
+      </div>
+      <div class="col-md-4" style="margin-top: 30px;">        
+        <div style="height: 260px;" class="card text-center">
+          <div class="card-body">
+            <h4 class="card-title">Indexar general</h4>
+            <p class="card-text"> indexa todos los libros de la base de datos.</p>
+          </div>
+          <a href="/indexa-libros-general" class="btn btn-outline-primary">Cargar</a>
+          
+        </div>          
+      </div>
+    </div>
+<hr>
+    <div class="row justify-content-center">
+      <h3 style="color: #d49266">Cargas de GoodReads</h3>
+    </div>
+    <div class="row justify-content-center" style="color:red">*Goodreads hizo cambios y ya no funcionan</div>
+    <hr>
+    <div class="row justify-content-center">       
+      <div  class="carta col-md-4">        
+          <div style="height: 260px;" class="card text-center">
+            <div class="card-body">
+              <h4 class="card-title">Cargar géneros.</h4>
+              <p class="card-text">Esto carga los géneros de los libros existente en goodReads.</p>
+              
+            </div>
+            
+            <a href="/carga-generos" class="btn disabled btn-outline-primary">Cargar</a>
+          </div>          
+      </div>
+
+      <div class="col-md-4">        
+        <div style="height: 260px;" class="card text-center">
+          <div class="card-body">
+            <h4 class="card-title">Cargar libros nuevos por genero.</h4>
+            <p class="card-text">Este proceso es muy lento, si no tienes libros cargados, recargar solo si es necesario.
+              Si tienes libros cargados se actualiza más rápido </p>       
+          </div>
+          <a href="/carga-libros" class="btn disabled btn-outline-primary">Cargar</a>
+        </div>          
+    </div>
+
+    <div class="col-md-4">        
+      <div style="height: 260px;" class="card text-center">
+        <div class="card-body">
+          <h4 class="card-title">Cargar libros más leidos de la semana por genero.</h4>
+          <p class="card-text">Este proceso es muy lento, si no tienes libros cargados, recargar solo si es necesario.
+            Si tienes libros cargados se actualiza más rápido.</p>   
+        </div>
+        <a href="/carga-libros-leidos" class="btn disabled btn-outline-primary">Cargar</a>
+      </div>          
+    </div>
+  </div>
+  <hr>
+  </div>
+{% endblock %}

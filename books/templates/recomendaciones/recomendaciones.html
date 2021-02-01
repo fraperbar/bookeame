@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block contenido %}
+    <div class="container">
+        <div class="row">
+            <div class="col-3"><a href="/votacion/1">Votar libros</a></div>
+            <div class="offset-6 text-right col-3"><a href="/misvotaciones/1">Mis votaciones</a></div>
+        </div>
+        <hr>
+        <div class="row justify-content-center">
+          <div class="col-3"><a href="/cargar-recomendacion-user/">Cargar mis recomendaciones</a></div>
+
+      </div>
+      <div class="row justify-content-center">
+        <p style="color: gray;">*Para cargar las recomendaciones se deben votar libros, con 3-4 es posible que empiece a funcionar, a más votos mejores recomendaciones.</p>
+        <p style="color: gray;">*Pulsar cada vez que se quiera actualizar las recomendaciones teniendo en cuenta que debes votar nuevos libros para que puedan cambiar.</p>
+        
+    </div>
+      <hr>
+        <div class="row justify-content-center">
+            <h1 style="color: #d49266">Recomendaciones</h1>
+        </div>
+        <div class="row justify-content-center">
+            basadas en similitud con otros usuarios
+        </div>
+        <hr>
+        {% for item, score in items %}
+        <div class="row justify-content-center">
+        <div class="col-12">
+            <table class="table table-striped" >
+              <tr>
+                <th style="color:#d49266"  scope="row">{{item.titulo}}</th>
+                <th style="text-align:end;" scope="row">Título</th>
+              </tr>
+              <tr>
+                <th style="color:#d49266"  scope="row">{{item.autor}}</th>
+                <th style="text-align:end;" scope="row">Autor</th>
+              </tr>
+              <tr>
+                <th style="color:#d49266"  scope="row">{{item.isbn}}</th>
+                <th style="text-align:end;" scope="row">ISBN</th>
+              </tr>
+              <tr>
+                <th style="color:#d49266"  scope="row">{{item.anyopublicacion}}</th>
+                <th style="text-align:end;" scope="row">Año de publicación</th>
+              </tr>
+              <tr>
+                <th style="color:#d49266"  scope="row">{{score | floatformat:"2"}}</th>
+                <th style="text-align:end;" scope="row">Score</th>
+              </tr>
+            
+            </table>
+            <hr>
+        {% empty %}
+        <div class="row justify-content-center">
+          <h2 style="color: red"> Datos del usuario insuficientes</h2><br>
+          
+        </div>
+        <div class="row justify-content-center"><p style="color: gray;">Debes votar más libros</p></div>
+        
+        </div>
+    </div>
+        {% endfor %}
+
+
+{% endblock %}

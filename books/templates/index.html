@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<div class="container">
+    
+    <div class="row justify-content-end">
+        <a href="/buscar">Buscar en los libros de goodreads --></a>
+    </div>
+    <div class="row justify-content-center">
+        
+    <h1 style="color: #d49266">Explora por géneros</h1>
+    <br>
+    
+    </div>
+    
+    <div class="row justify-content-center">
+        <div>pulsa en un botón para desplegar y vuelve a pulsarlo para cerrarlo</div>
+    </div>
+    <hr>
+    <div class="row justify-content-center">
+    {% regroup libs by genero as grouped %}
+        {% for group in grouped %}
+            <button href="#libro{{forloop.counter }}" class="col-lg-3 muestra" data-toggle="collapse">{{group.grouper}}
+            </button>
+
+        
+        <div class="muestra">
+            <div id="libro{{ forloop.counter }}" class="collapse">
+            {% for row in group.list %}
+                
+                <a href="/libros/{{row.id}}"><img  class="col-lg-2 col-md-3 col-sm-4 col-5" src={{row.urlImagen}}></img></a>
+                
+
+            {% endfor %}
+            <a href="/genero/{{group.grouper.nombre}}" class="agenero text-rigth" >ver más del género</a>
+        </div> 
+    </div>  
+        
+
+
+        {% endfor %}
+    </div>
+    <script>
+        let botones = document.getElementsByTagName("button");
+        for(i=0;i<botones.length;i++){
+            let boton = botones[i]
+            boton.onclick=()=>{
+                boton.style.backgroundColor="#a0897a"
+            }
+            boton.onclick=()=>{
+                if(getComputedStyle(boton).backgroundColor=="rgb(219, 187, 166)"){
+                    boton.style.backgroundColor="#a0897a"
+                }else{
+                    boton.style.backgroundColor="rgb(219, 187, 166)"
+                }
+            }
+        }
+    </script>
+</div>
+{% endblock %}

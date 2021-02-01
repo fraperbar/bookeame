@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block contenido %}
+
+<div class="container">
+    <div class="row">
+       <img src="{{libro.urlImagen}}" class="col-4" style="float: left;"></img>
+       <div>
+        <b>Título: </b>{{libro.titulo}}
+        <br>
+        <b>ISBN: </b>   {% ifequal libro.isbn 0 %}
+                            el libro no tiene su ISBN registrado.
+                        {% else %}
+                            {{libro.isbn}}
+                        {% endifequal %}
+        <br>
+        <b>Autor: </b> {{libro.autor}} 
+        <br>
+        <b>Fecha de publicación: </b>   {% if libro.fechapublicacion is None %}
+                                            el libro no tiene fecha de publicación registrada.
+                                        {% else %}
+                                            {{libro.fechapublicacion|date:"d/m/y"}}; {{libro.fechapublicacion|date:"M D, y"}}
+                                        {% endif %} 
+        <br>
+        <b>Votación:</b> {{libro.rating}}
+        
+        </div>
+    </div>
+    <hr>
+    <div class="row justify-content-center">
+        <h2>Descripción:</h2>
+    </div>
+    <hr>
+        <div class="row">
+            <span id="generador" style="display:true; text-align: justify;"></span>
+            </div>
+       <span id="descripcionHTML" class="desaparece">{{libro.descripcionHTML}}</span>
+       <script>
+           aux = document.getElementById("descripcionHTML").innerText
+           document.getElementById("generador").innerHTML=aux
+           document.getElementById("generador").getElementsByTagName("span")[0].style.display="contents"
+       </script>
+    </div>
+</div>
+{% endblock %}
